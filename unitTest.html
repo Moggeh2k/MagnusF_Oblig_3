@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Test Suite</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.10.1.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.10.1.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/createPollPageController.js"></script>
+    <script src="js/overviewController.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+
+        let selectedPollIndex = 0;
+        function updateView() {};
+
+      
+        createOrUpdatePoll();
+
+        QUnit.module('Overview Page', function () {
+            QUnit.test('Open Poll', function (assert) {
+				openPoll(selectedPollIndex);
+                assert.equal(model.app.currentPage, 'createPoll');
+            });
+
+            QUnit.test('Load Poll', function (assert) {
+				loadPoll(selectedPollIndex);
+				assert.equal(model.app.currentPoll, selectedPollIndex);
+				assert.equal(model.inputs.createPoll.pollId, selectedPollIndex);
+            });
+        });
+    </script>
+</body>
+
+</html>
